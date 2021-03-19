@@ -4,7 +4,14 @@
     "sourceType": "module",
     "ecmaVersion": 2015
   },
-  "plugins": [ "@nativescript" ],
+  "plugins": [
+      "@nativescript",
+      "@typescript-eslint"
+  ],
+  "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
         "@nativescript/no-nativescript-angular-imports": "warn",
         "@nativescript/no-tns-core-modules-imports": "warn",
