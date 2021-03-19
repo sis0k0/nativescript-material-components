@@ -1,6 +1,6 @@
 import { AfterViewInit, Directive } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Page } from '@nativescript/core';
+import { Page } from 'tns-core-modules';
 import { themer } from '@nativescript-community/ui-material-core';
 
 @Directive({
