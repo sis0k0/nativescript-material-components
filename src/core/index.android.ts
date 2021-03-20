@@ -199,7 +199,7 @@ class ViewWithElevationAndRipple extends View {
     [rippleColorProperty.setNative](color: Color) {
         const rippleColor = getRippleColor(color);
         const nativeViewProtected = this.nativeViewProtected;
-        if (this instanceof Button) {
+        if (this instanceof Button && isPostMarshmallow()) {
             const foreground = (nativeViewProtected as android.widget.Button).getForeground();
             if (foreground instanceof android.graphics.drawable.RippleDrawable) {
                 foreground.setColor(getColorStateList(rippleColor));
@@ -216,9 +216,9 @@ class ViewWithElevationAndRipple extends View {
         if (!rippleDrawable) {
             this.setRippleDrawable(nativeViewProtected, Length.toDevicePixels(this.style.borderTopLeftRadius));
         } else {
-            if (isPostLollipopMR1()) {
+            if (isPostLollipop()) {
                 (rippleDrawable as android.graphics.drawable.RippleDrawable).setColor(getColorStateList(rippleColor));
-            } else {
+            } else if ((rippleDrawable as any).rippleShape) {
                 (rippleDrawable as any).rippleShape.getPaint().setColor(rippleColor);
             }
         }
@@ -285,10 +285,12 @@ class ViewWithElevationAndRipple extends View {
 }
 class ViewOverride extends View {
     [androidElevationProperty.setNative](value: number) {
-        // override to prevent override of elevation
+        // override to prevent override of dynamicElevationOffset
+        this[elevationProperty.setNative](value);
     }
     [androidDynamicElevationOffsetProperty.setNative](value: number) {
-        // override to prevent override of dynamicElevationOffset
+        // override to prevent override of elevation
+        this[dynamicElevationOffsetProperty.setNative](value);
     }
 }
 

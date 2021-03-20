@@ -31,9 +31,10 @@ import {
     paddingTopProperty,
     placeholderColorProperty,
     profile,
-    textAlignmentProperty
+    textAlignmentProperty,
+    LengthType,
+    Enums
 } from '@nativescript/core';
-import { TextAlignment } from '@nativescript/core/ui/text-base';
 import { secureProperty } from '@nativescript/core/ui/text-field';
 import { TextFieldBase } from './textfield.common';
 
@@ -70,17 +71,17 @@ export class TextField extends TextFieldBase {
         let needsTransparent = false;
         if (variant === 'filled') {
             if (!filledId) {
-                filledId = getLayout('material_text_field_filled');
+                filledId = getLayout(this._context, 'material_text_field_filled');
             }
             layoutId = filledId;
         } else if (variant === 'outline') {
             if (!outlineId) {
-                outlineId = getLayout('material_text_field_outline');
+                outlineId = getLayout(this._context, 'material_text_field_outline');
             }
             layoutId = outlineId;
         } else {
             if (!noneId) {
-                noneId = getLayout('material_text_field');
+                noneId = getLayout(this._context, 'material_text_field');
             }
             layoutId = noneId;
             needsTransparent = true;
@@ -289,19 +290,19 @@ export class TextField extends TextFieldBase {
             this.nativeTextViewProtected.setTypeface(value instanceof Font ? value.getAndroidTypeface() : value);
         }
     }
-    [paddingTopProperty.setNative](value: Length) {
+    [paddingTopProperty.setNative](value: LengthType) {
         org.nativescript.widgets.ViewHelper.setPaddingTop(this.nativeViewProtected, Length.toDevicePixels(value, 0) + Length.toDevicePixels(this.style.borderTopWidth, 0));
     }
-    [paddingRightProperty.setNative](value: Length) {
+    [paddingRightProperty.setNative](value: LengthType) {
         org.nativescript.widgets.ViewHelper.setPaddingRight(this.nativeViewProtected, Length.toDevicePixels(value, 0) + Length.toDevicePixels(this.style.borderRightWidth, 0));
     }
-    [paddingBottomProperty.setNative](value: Length) {
+    [paddingBottomProperty.setNative](value: LengthType) {
         org.nativescript.widgets.ViewHelper.setPaddingBottom(this.nativeViewProtected, Length.toDevicePixels(value, 0) + Length.toDevicePixels(this.style.borderBottomWidth, 0));
     }
-    [paddingLeftProperty.setNative](value: Length) {
+    [paddingLeftProperty.setNative](value: LengthType) {
         org.nativescript.widgets.ViewHelper.setPaddingLeft(this.nativeViewProtected, Length.toDevicePixels(value, 0) + Length.toDevicePixels(this.style.borderLeftWidth, 0));
     }
-    [textAlignmentProperty.setNative](value: TextAlignment) {
+    [textAlignmentProperty.setNative](value: Enums.TextAlignmentType) {
         this.nativeTextViewProtected.setGravity(getHorizontalGravity(value) | getVerticalGravity(this.verticalTextAlignment));
     }
     [verticalTextAlignmentProperty.setNative](value: VerticalTextAlignment) {

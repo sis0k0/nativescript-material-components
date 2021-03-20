@@ -1,6 +1,5 @@
 import { VerticalTextAlignment } from '@nativescript-community/text';
-import { Application, Color, Utils, ViewBase, profile } from '@nativescript/core';
-import { TextAlignment } from '@nativescript/core/ui/text-base';
+import { Application, Color, Utils, ViewBase, profile, Enums } from '@nativescript/core';
 
 let isPostLollipopVar: boolean;
 export function isPostLollipop() {
@@ -230,30 +229,27 @@ export function setFocusable(view: android.view.View, focusable: boolean) {
     view.setFocusableInTouchMode(focusable);
 }
 
-export function getLayout(id: string) {
-    if (!id) {
+export function getLayout(context: android.content.Context, id: string) {
+    if (!id || !context) {
         return 0;
     }
-    const context: android.content.Context = Application.android.context;
     return context.getResources().getIdentifier(id, 'layout', context.getPackageName());
 }
 
-export function getStyle(id: string) {
-    if (!id) {
+export function getStyle(context: android.content.Context, id: string) {
+    if (!id || !context) {
         return 0;
     }
-    const context: android.content.Context = Application.android.context;
     return context.getResources().getIdentifier(id, 'style', context.getPackageName());
 }
-export function getAttr(id: string) {
-    if (!id) {
+export function getAttr(context: android.content.Context, id: string) {
+    if (!id || !context) {
         return 0;
     }
-    const context: android.content.Context = Application.android.context;
     return context.getResources().getIdentifier(id, 'attr', context.getPackageName());
 }
 
-export function getHorizontalGravity(textAlignment: TextAlignment) {
+export function getHorizontalGravity(textAlignment: Enums.TextAlignmentType) {
     switch (textAlignment) {
         case 'initial':
         case 'left':

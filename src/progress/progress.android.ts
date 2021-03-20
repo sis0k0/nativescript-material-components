@@ -1,6 +1,5 @@
 import { themer } from '@nativescript-community/ui-material-core';
 import { Color, colorProperty, visibilityProperty } from '@nativescript/core';
-import { Visibility } from '@nativescript/core/ui/enums';
 import { ProgressBase, busyProperty, indeterminateProperty, progressBackgroundColorProperty, progressColorProperty } from './progress-common';
 
 export class Progress extends ProgressBase {
